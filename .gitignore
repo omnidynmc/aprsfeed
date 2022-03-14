@@ -31,6 +31,8 @@
 *.out
 *.app
 
+/logs/old
+
 /Makefile
 /Makefile.in
 /aclocal.m4
