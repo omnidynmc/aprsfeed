@@ -661,7 +661,7 @@ std::cout << "BODY(" << _stagedFrame.body << ")" << std::endl;
 
   Subscription *StompParser::find_subscription(const std::string &id) {
     subscriptions_itr itr = _subscriptions.find(id);
-    if (itr == _subscriptions.end()) return false;
+    if (itr == _subscriptions.end()) return NULL;
     return _subscriptions[id];
   } // StompParser::find_subscription
 
