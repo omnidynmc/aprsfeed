@@ -36,6 +36,16 @@
 /logs/old
 /contrib
 
+/modules/Makefile
+/modules/Makefile.in
+
+/libraries/openframe/Makefile
+/libraries/openframe/Makefile.in
+/libraries/openstats/Makefile
+/libraries/openstats/Makefile.in
+/libraries/stomp/Makefile
+/libraries/stomp/Makefile.in
+
 /Makefile
 /Makefile.in
 /aclocal.m4
