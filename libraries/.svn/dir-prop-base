@@ -1,0 +1,8 @@
+K 13
+svn:externals
+V 157
+openframe svn+ssh://svn/home/omni/svn/openframe/trunk
+openstats svn+ssh://svn/home/omni/svn/openstats/trunk
+stomp svn+ssh://svn/home/omni/svn/libstomp/trunk
+
+END

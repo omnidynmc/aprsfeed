@@ -1,0 +1,81 @@
+app {
+  bookmarks {
+    load "remove module lib/libsmpp.so";
+  } # opentest.bookmarks
+
+  prompt "aprsfeed> ";
+
+  stompstats {
+    source "aprsfeed";
+    instance "devel";
+    interval 30;
+    hosts "10.0.1.3:61613";
+    login "aprsfeed-stompstats-dev";
+    passcode "aprsfeed-stompstats-dev";
+    destination "/topic/stats.devel";
+  } # stompstats
+
+  uplink1 {
+    enabled true;
+    hosts "first.aprs.net:10152,second.aprs.net:10152,third.aprs.net:10152";
+    destination "/queue/feeds.aprs.is";
+
+    push_hosts "localhost:61613";
+    push_destination "/queue/push.aprs.is";
+
+    stomp {
+      login "aprsfeed-push-aprs";
+      passcode "aprsfeed-push-aprs";
+    } # stomp
+
+    interval {
+      logstats 15;
+    } # app.uplink.interval
+
+    timeout {
+      read 5;
+    } # app.uplink.timeout
+  } # app.uplink1
+
+  uplink2 {
+    enabled false;
+    hosts "cwop.aprs.net:10152";
+    destination "/queue/feeds.cwop.is";
+
+    push_hosts "localhost:61613";
+    push_destination "/queue/push.cwop.is";
+
+    stomp {
+      login "aprsfeed-push-cwop";
+      passcode "aprsfeed-push-cwop";
+    } # stomp
+
+    interval {
+      logstats 15;
+    } # app.uplink.interval
+
+    timeout {
+      read 5;
+    } # app.uplink.timeout
+  } # app.uplink2
+
+  modules {
+    load [ "lib/libmodstomp.so" ];
+  } # modules
+
+} # app
+
+module {
+  stomp {
+    port 61613;
+    max_work 1000;
+
+    log {
+      level 6;
+    } # module.stomp.log
+
+    timer {
+      logstats 30;
+    } # stats
+  } # stomp
+} # module

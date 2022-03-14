@@ -1,0 +1,3 @@
+openframe svn+ssh://svn/home/omni/svn/openframe/trunk
+openstats svn+ssh://svn/home/omni/svn/openstats/trunk
+stomp svn+ssh://svn/home/omni/svn/libstomp/trunk
