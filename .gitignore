@@ -31,6 +31,8 @@
 *.out
 *.app
 
+/aprsfeed.pid
+
 /logs/old
 /contrib
 
