@@ -37,10 +37,8 @@
 /contrib
 
 /modules/Makefile
-/modules/Makefile.in
 
 /libraries/openframe/Makefile
-/libraries/openframe/Makefile.in
 /libraries/openframe/aclocal.m4
 /libraries/openframe/autom4te.cache/
 /libraries/openframe/config.*
@@ -49,7 +47,6 @@
 /libraries/openframe/stamp-h?
 
 /libraries/openstats/Makefile
-/libraries/openstats/Makefile.in
 /libraries/openstats/aclocal.m4
 /libraries/openstats/autom4te.cache/
 /libraries/openstats/config.*
@@ -59,7 +56,6 @@
 
 
 /libraries/stomp/Makefile
-/libraries/stomp/Makefile.in
 /libraries/stomp/aclocal.m4
 /libraries/stomp/autom4te.cache/
 /libraries/stomp/config.*
@@ -68,7 +64,6 @@
 /libraries/stomp/stamp-h?
 
 /Makefile
-/Makefile.in
 /aclocal.m4
 /autom4te.cache/
 /config.*
@@ -81,7 +76,6 @@
 *~
 
 /Makefile
-/Makefile.in
 /aclocal.m4
 /autom4te.cache/
 /config.*
