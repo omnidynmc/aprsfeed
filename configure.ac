@@ -5,7 +5,7 @@ AC_PREREQ([2.65])
 AC_INIT([aprsfeed], [1.0.0.1], [gcarter@openaprs.net])
 AC_CONFIG_SRCDIR([src/main.cpp])
 AC_CONFIG_HEADERS([include/config.h])
-AM_INIT_AUTOMAKE([aprsfeed], [1.0.0.1])
+AM_INIT_AUTOMAKE
 LT_INIT
 AC_CONFIG_MACRO_DIR([m4])
 
@@ -25,8 +25,8 @@ prefix="`pwd`"
 bindir="`pwd`"
 libdir="`pwd`/lib"
 includedir="`pwd`/include"
-ofincludedir="`pwd`/libraries/openframe/include"
-oflibdir="`pwd`/libraries/openframe/lib"
+ofincludedir="/usr/local/include/openframe"
+oflibdir="/usr/local/lib"
 
 osincludedir="`pwd`/libraries/openstats/include"
 oslibdir="`pwd`/libraries/openstats/lib"
