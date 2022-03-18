@@ -5,7 +5,7 @@
 #include <stdlib.h>
 
 #include <openframe/openframe.h>
-#include <stomp/StompHeader.h>
+#include <stomp/StompHeaders.h>
 
 #include <Uplink.h>
 #include <Feed.h>
@@ -41,6 +41,10 @@ namespace aprsfeed {
     _num_packets = 0;
     _num_frames_out = 0;
     _num_frames_in = 0;
+
+    _purge.last_at = time(NULL);
+    _purge.intval = 2;
+    _purge.limit = 20;
   } // Uplink::Uplink
 
   Uplink::~Uplink() {
@@ -105,30 +109,42 @@ namespace aprsfeed {
     datapoint("num.bytes.in", num_bytes_in);
     datapoint("num.sendq.bytes", _sendq_bytes);
 
-    bool feed_ok = _feed->is_ready();
+    bool is_purge_time = (_purge.last_at < time(NULL) - _purge.intval
+                         && !_sendq.empty())
+                         || _sendq.size() >= _purge.limit;
+    if (is_purge_time) {
+      size_t num_frames_out = 0;
+      size_t num_bytes_out = 0;
+      size_t num = 0;
+      std::stringstream s;
+      while( !_sendq.empty() && _feed->is_ready() ) {
+        Line *line = _sendq.front();
 
-    size_t num_frames_out = 0;
-    size_t num_bytes_out = 0;
-    while( !_sendq.empty() && feed_ok) {
-      Line *line = _sendq.front();
-      std::string created = openframe::stringify<time_t>( line->created() );
-      stomp::StompHeaders *headers = new stomp::StompHeaders("APRS-Created", created);
-      _feed->send(_destination, line->str(), headers);
-      size_t len = line->str().length();
-      num_bytes_out += len;
-      _sendq_bytes -= len;
-      delete line;
-      _sendq.pop_front();
+        s << line->str();
 
-      num_frames_out++;
-    } // while
-    _num_frames_out += num_frames_out;
-    datapoint("num.frames.out", num_frames_out);
-    datapoint("num.bytes.out", num_bytes_out);
+        size_t len = line->str().length();
 
-    for(size_t i=0; i < 10 && feed_ok && _feed->process(); i++);
+        num_bytes_out += len;
+        _sendq_bytes -= len;
+
+        delete line;
+        _sendq.pop_front();
+
+        ++num;
+        ++num_frames_out;
+      } // while
+      // send any leftovers
+      if (num) _feed->send(_destination, s.str());
+
+      _num_frames_out += num_frames_out;
+      datapoint("num.frames.out", num_frames_out);
+      datapoint("num.bytes.out", num_bytes_out);
+      _purge.last_at = time(NULL);
+    } // if
+
+    for(size_t i=0; i < 10 && _feed->is_ready() && _feed->process(); i++);
     size_t num_frames_in = 0;
-    for(size_t i=0; i < 10 && feed_ok; i++) {
+    for(size_t i=0; i < 10 && _feed->is_ready(); i++) {
       stomp::StompFrame *frame;
       bool ok = _feed->next_frame(frame);
       if (!ok) break;
@@ -148,7 +164,7 @@ namespace aprsfeed {
     _num_frames_in += num_frames_in;
     if (num_frames_in) datapoint("num.frames.in", num_frames_in);
 
-    if (feed_ok &&
+    if (_feed->is_ready() &&
         _num_messages
         && (_num_messages > 512 || _last_ack < time(NULL) - 2) ) {
       stomp::StompFrame *frame = new stomp::StompFrame("ACK");
