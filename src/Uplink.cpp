@@ -109,29 +109,6 @@ namespace aprsfeed {
     datapoint("num.bytes.in", num_bytes_in);
     datapoint("num.sendq.bytes", _sendq_bytes);
 
-<<<<<<< HEAD
-    bool feed_ok = _feed->is_ready();
-
-    size_t num_frames_out = 0;
-    size_t num_bytes_out = 0;
-    while( !_sendq.empty() && feed_ok) {
-      Line *line = _sendq.front();
-      std::string created = openframe::stringify<time_t>( line->created() );
-      stomp::StompHeaders *headers = new stomp::StompHeaders("APRS-Created", created);
-      headers->add_header("APRS-UUID", stomp::StompMessage::create_uuid());
-      _feed->send(_destination, line->str(), headers);
-      size_t len = line->str().length();
-      num_bytes_out += len;
-      _sendq_bytes -= len;
-      delete line;
-      _sendq.pop_front();
-
-      num_frames_out++;
-    } // while
-    _num_frames_out += num_frames_out;
-    datapoint("num.frames.out", num_frames_out);
-    datapoint("num.bytes.out", num_bytes_out);
-=======
     bool is_purge_time = (_purge.last_at < time(NULL) - _purge.intval
                          && !_sendq.empty())
                          || _sendq.size() >= _purge.limit;
@@ -164,7 +141,6 @@ namespace aprsfeed {
       datapoint("num.bytes.out", num_bytes_out);
       _purge.last_at = time(NULL);
     } // if
->>>>>>> 0ec132cf45af6d3bea9c36cee6d458af6fd9e186
 
     for(size_t i=0; i < 10 && _feed->is_ready() && _feed->process(); i++);
     size_t num_frames_in = 0;
