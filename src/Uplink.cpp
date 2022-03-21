@@ -113,6 +113,7 @@ namespace aprsfeed {
       Line *line = _sendq.front();
       std::string created = openframe::stringify<time_t>( line->created() );
       stomp::StompHeaders *headers = new stomp::StompHeaders("APRS-Created", created);
+      headers->add_header("APRS-UUID", stomp::StompMessage::create_uuid());
       _feed->send(_destination, line->str(), headers);
       size_t len = line->str().length();
       num_bytes_out += len;
