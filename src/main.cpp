@@ -83,7 +83,7 @@ int main(int argc, char **argv) {
 
   app->start();
   if (daemonize) {
-    while( !app->is_done() ) sleep(1);
+    while( !app->App::Application::is_done() ) sleep(1);
   } // if
   else app->run();
   app->stop();

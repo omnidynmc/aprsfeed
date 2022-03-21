@@ -23,7 +23,11 @@ namespace aprsfeed {
       Line(const std::string &str) : _str(str), _created( time(NULL) ) { }
       virtual ~Line() { }
 
-      std::string str() const { return _str; }
+      std::string str() const {
+        std::stringstream s;
+        s << _created << " " << _str << std::endl;
+        return s.str();
+      } // str
       time_t created() const { return _created; }
     private:
       std::string _str;
@@ -77,7 +81,7 @@ namespace aprsfeed {
       void onDestroyStats();
 
     protected:
-      typedef std::list<Line *> sendq_t;
+      typedef std::deque<Line *> sendq_t;
       typedef sendq_t::iterator sendq_itr;
       typedef sendq_t::const_iterator sendq_citr;
       typedef sendq_t::size_type sendq_st;
@@ -116,6 +120,13 @@ namespace aprsfeed {
       std::string _last_message_id;
       time_t _last_ack;
       size_t _num_messages;
+
+      // purge
+      struct purge_t {
+        size_t limit;
+        time_t intval;
+        time_t last_at;
+      } _purge;
 
       // stats
       size_t _num_packets;

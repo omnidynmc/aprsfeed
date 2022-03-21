@@ -8,8 +8,6 @@
 #include <openframe/App/Application.h>
 #include <stomp/StompStats.h>
 
-#include "App_Log.h"
-
 namespace aprsfeed {
 /**************************************************************************
  ** General Defines                                                      **

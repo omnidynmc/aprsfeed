@@ -106,7 +106,7 @@ namespace aprsfeed {
   } // App::Sigusr2
   void App::rcvSigint() {
     LOG(LogNotice, << "### SIGINT Received" << std::endl);
-    set_done(true);
+    App::Application::set_done(true);
   } // App::rcvSigint
   void App::rcvSigpipe() {
     LOG(LogNotice, << "### SIGPIPE Received" << std::endl);
@@ -137,7 +137,7 @@ namespace aprsfeed {
     uplink->init();
     uplink->start();
 
-    while( !a->is_done() ) {
+    while( !a->App::Application::is_done() ) {
       bool did_work = uplink->run();
       if (!did_work) usleep(10000);
     } // while

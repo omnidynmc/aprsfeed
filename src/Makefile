@@ -192,7 +192,11 @@ CPPFLAGS =  -I/usr/include
 CXX = g++
 CXXCPP = g++ -E
 CXXDEPMODE = depmode=gcc3
+<<<<<<< HEAD
+CXXFLAGS = -Wall -pipe -g -I/home/ubuntu/git/aprsfeed/include -I/home/ubuntu/git/aprsfeed/libraries/openframe/include -I/home/ubuntu/git/aprsfeed/libraries/stomp/include -I/home/ubuntu/git/aprsfeed/libraries/openstats/include
+=======
 CXXFLAGS = -Wall -pipe -g -I/root/aprsfeed/include -I/usr/local/include/openframe -I/root/aprsfeed/libraries/stomp/include -I/root/aprsfeed/libraries/openstats/include
+>>>>>>> 5b3c917b6321d63fdf4500233ae59557a71d5ec4
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
@@ -214,7 +218,11 @@ INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
 LD = /usr/bin/ld -m elf_x86_64
 LDFLAGS = 
 LIBOBJS = 
+<<<<<<< HEAD
+LIBS = -lossp-uuid++ -lz -lreadline -lpthread -ldl  -L/home/ubuntu/git/aprsfeed/lib  -L/home/ubuntu/git/aprsfeed/libraries/openframe/lib -L/home/ubuntu/git/aprsfeed/libraries/stomp/lib -L/home/ubuntu/git/aprsfeed/libraries/openstats/lib -lopenframe -lstomp -lopenstats
+=======
 LIBS = -lossp-uuid++ -lz -lreadline -lpthread -ldl  -L/root/aprsfeed/lib  -L/usr/local/lib -L/root/aprsfeed/libraries/stomp/lib -L/root/aprsfeed/libraries/openstats/lib -lopenframe -lstomp -lopenstats
+>>>>>>> 5b3c917b6321d63fdf4500233ae59557a71d5ec4
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
 LIBTOOL_DEPS = ./ltmain.sh
 LIPO = 
@@ -244,10 +252,17 @@ SET_MAKE =
 SHELL = /bin/bash
 STRIP = strip
 VERSION = 1.0.0.1
+<<<<<<< HEAD
+abs_builddir = /home/ubuntu/git/aprsfeed/src
+abs_srcdir = /home/ubuntu/git/aprsfeed/src
+abs_top_builddir = /home/ubuntu/git/aprsfeed
+abs_top_srcdir = /home/ubuntu/git/aprsfeed
+=======
 abs_builddir = /root/aprsfeed/src
 abs_srcdir = /root/aprsfeed/src
 abs_top_builddir = /root/aprsfeed
 abs_top_srcdir = /root/aprsfeed
+>>>>>>> 5b3c917b6321d63fdf4500233ae59557a71d5ec4
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_CXX = g++
@@ -257,8 +272,13 @@ am__leading_dot = .
 am__quote = 
 am__tar = $${TAR-tar} chof - "$$tardir"
 am__untar = $${TAR-tar} xf -
+<<<<<<< HEAD
+bindir = /home/ubuntu/git/aprsfeed
+build = x86_64-unknown-linux-gnu
+=======
 bindir = /root/aprsfeed
 build = x86_64-pc-linux-gnu
+>>>>>>> 5b3c917b6321d63fdf4500233ae59557a71d5ec4
 build_alias = 
 build_cpu = x86_64
 build_os = linux-gnu
@@ -275,10 +295,17 @@ host_cpu = x86_64
 host_os = linux-gnu
 host_vendor = pc
 htmldir = ${docdir}
+<<<<<<< HEAD
+includedir = /home/ubuntu/git/aprsfeed/include
+infodir = ${datarootdir}/info
+install_sh = ${SHELL} /home/ubuntu/git/aprsfeed/install-sh
+libdir = /home/ubuntu/git/aprsfeed/lib
+=======
 includedir = /root/aprsfeed/include
 infodir = ${datarootdir}/info
 install_sh = ${SHELL} /root/aprsfeed/install-sh
 libdir = /root/aprsfeed/lib
+>>>>>>> 5b3c917b6321d63fdf4500233ae59557a71d5ec4
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
 localstatedir = ${prefix}/var
@@ -286,7 +313,11 @@ mandir = ${datarootdir}/man
 mkdir_p = $(MKDIR_P)
 oldincludedir = /usr/include
 pdfdir = ${docdir}
+<<<<<<< HEAD
+prefix = /home/ubuntu/git/aprsfeed
+=======
 prefix = /root/aprsfeed
+>>>>>>> 5b3c917b6321d63fdf4500233ae59557a71d5ec4
 program_transform_name = s,x,x,
 psdir = ${docdir}
 runstatedir = ${localstatedir}/run
