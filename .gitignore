@@ -32,6 +32,7 @@
 *.app
 
 /aprsfeed.pid
+/aprsfeed
 /etc/*.conf
 
 /logs/old
